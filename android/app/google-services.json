@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "519759205772",
+    "project_id": "calista-app",
+    "storage_bucket": "calista-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519759205772:android:6c9c0558f4a30ce1b3f2a9",
+        "android_client_info": {
+          "package_name": "com.calista.calista"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlWlsDuEZp0gvwH3MY9ESv_KzuM0e_eWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

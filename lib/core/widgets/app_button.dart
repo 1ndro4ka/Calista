@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
+import '../theme/app_radius.dart';
+import '../theme/app_typography.dart';
+
+/// Standard Primary Button for Calista.
+/// Handles loading state, disabled state, optional leading/trailing icons.
+class AppButton extends StatelessWidget {
+  final String text;
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final bool isFullWidth;
+  final IconData? icon;
+  final Color? backgroundColor;
+  final Color? textColor;
+
+  const AppButton({
+    super.key,
+    required this.text,
+    this.onPressed,
+    this.isLoading = false,
+    this.isFullWidth = true,
+    this.icon,
+    this.backgroundColor,
+    this.textColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final effectiveBg = backgroundColor ?? AppColors.primary;
+    final effectiveFg = textColor ?? AppColors.textInverse;
+
+    Widget child = Row(
+      mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (isLoading) ...[
+          SizedBox(
+            width: 18.0,
+            height: 18.0,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.0,
+              valueColor: AlwaysStoppedAnimation<Color>(effectiveFg),
+            ),
+          ),
+          const SizedBox(width: 12.0),
+        ] else if (icon != null) ...[
+          Icon(icon, size: 18.0, color: effectiveFg),
+          const SizedBox(width: 8.0),
+        ],
+        Text(
+          text,
+          style: AppTypography.labelLarge.copyWith(color: effectiveFg),
+        ),
+      ],
+    );
+
+    return SizedBox(
+      width: isFullWidth ? double.infinity : null,
+      height: 48.0,
+      child: ElevatedButton(
+        onPressed: isLoading ? null : onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: effectiveBg,
+          foregroundColor: effectiveFg,
+          disabledBackgroundColor: AppColors.border,
+          disabledForegroundColor: AppColors.textTertiary,
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: AppRadius.radiusMd),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        ),
+        child: child,
+      ),
+    );
+  }
+}

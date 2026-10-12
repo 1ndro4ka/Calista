@@ -1,0 +1,26 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "calista-app",
+          "appId": "1:519759205772:android:6c9c0558f4a30ce1b3f2a9",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "calista-app",
+          "configurations": {
+            "android": "1:519759205772:android:6c9c0558f4a30ce1b3f2a9",
+            "ios": "1:519759205772:ios:39948cae50442df4b3f2a9"
+          }
+        }
+      }
+    }
+  }
+}
