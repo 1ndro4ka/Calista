@@ -13,6 +13,7 @@ class AppButton extends StatelessWidget {
   final IconData? icon;
   final Color? backgroundColor;
   final Color? textColor;
+  final EdgeInsetsGeometry? padding;
 
   const AppButton({
     super.key,
@@ -23,12 +24,21 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.backgroundColor,
     this.textColor,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     final effectiveBg = backgroundColor ?? AppColors.primary;
     final effectiveFg = textColor ?? AppColors.textInverse;
+
+    final textWidget = Text(
+      text,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
+      style: AppTypography.labelLarge.copyWith(color: effectiveFg),
+    );
 
     Widget child = Row(
       mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
@@ -43,15 +53,15 @@ class AppButton extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation<Color>(effectiveFg),
             ),
           ),
-          const SizedBox(width: 12.0),
+          const SizedBox(width: 8.0),
         ] else if (icon != null) ...[
           Icon(icon, size: 18.0, color: effectiveFg),
           const SizedBox(width: 8.0),
         ],
-        Text(
-          text,
-          style: AppTypography.labelLarge.copyWith(color: effectiveFg),
-        ),
+        if (isFullWidth)
+          Flexible(child: textWidget)
+        else
+          textWidget,
       ],
     );
 
@@ -67,7 +77,7 @@ class AppButton extends StatelessWidget {
           disabledForegroundColor: AppColors.textTertiary,
           elevation: 0,
           shape: RoundedRectangleBorder(borderRadius: AppRadius.radiusMd),
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 16.0),
         ),
         child: child,
       ),

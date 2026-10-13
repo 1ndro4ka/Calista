@@ -140,7 +140,7 @@ class _ApplicationsPageState extends ConsumerState<ApplicationsPage>
                           context,
                           title: 'Принять кандидата?',
                           message: 'Пользователь «${app.applicantName}» станет участником проекта «${app.projectTitle}».',
-                          confirmLabel: 'Принять в команду',
+                          confirmLabel: 'Принять',
                         );
                         if (confirmed && context.mounted) {
                           final success = await ref

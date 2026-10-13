@@ -143,5 +143,24 @@ void main() {
       await tester.tap(find.text('Flutter'));
       expect(skillTapped, isTrue);
     });
+
+    testWidgets('AppButton with long text inside constrained width truncates without overflow', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 100.0,
+                child: AppButton(
+                  text: 'Очень длинный текст кнопки',
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(tester.takeException(), isNull);
+    });
   });
 }

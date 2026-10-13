@@ -65,6 +65,7 @@ class ConfirmDialog extends StatelessWidget {
             Expanded(
               child: AppOutlinedButton(
                 text: cancelLabel,
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 onPressed: () => Navigator.of(context).pop(false),
               ),
             ),
@@ -72,6 +73,7 @@ class ConfirmDialog extends StatelessWidget {
             Expanded(
               child: AppButton(
                 text: confirmLabel,
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 backgroundColor: isDestructive ? AppColors.error : AppColors.primary,
                 textColor: AppColors.textInverse,
                 onPressed: () => Navigator.of(context).pop(true),

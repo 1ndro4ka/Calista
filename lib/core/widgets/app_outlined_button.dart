@@ -13,6 +13,7 @@ class AppOutlinedButton extends StatelessWidget {
   final IconData? icon;
   final Color? borderColor;
   final Color? textColor;
+  final EdgeInsetsGeometry? padding;
 
   const AppOutlinedButton({
     super.key,
@@ -24,12 +25,21 @@ class AppOutlinedButton extends StatelessWidget {
     this.icon,
     this.borderColor,
     this.textColor,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     final effectiveBorder = borderColor ?? AppColors.border;
     final effectiveFg = textColor ?? AppColors.textPrimary;
+
+    final textWidget = Text(
+      text,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
+      style: AppTypography.labelLarge.copyWith(color: effectiveFg),
+    );
 
     Widget child = Row(
       mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
@@ -44,15 +54,15 @@ class AppOutlinedButton extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation<Color>(effectiveFg),
             ),
           ),
-          const SizedBox(width: 12.0),
+          const SizedBox(width: 8.0),
         ] else if (icon != null) ...[
           Icon(icon, size: 18.0, color: effectiveFg),
           const SizedBox(width: 8.0),
         ],
-        Text(
-          text,
-          style: AppTypography.labelLarge.copyWith(color: effectiveFg),
-        ),
+        if (isFullWidth)
+          Flexible(child: textWidget)
+        else
+          textWidget,
       ],
     );
 
@@ -65,7 +75,7 @@ class AppOutlinedButton extends StatelessWidget {
           foregroundColor: effectiveFg,
           side: BorderSide(color: effectiveBorder, width: 1.0),
           shape: RoundedRectangleBorder(borderRadius: AppRadius.radiusMd),
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 16.0),
         ),
         child: child,
       ),
